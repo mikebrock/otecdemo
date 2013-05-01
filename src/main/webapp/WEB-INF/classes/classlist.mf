@@ -1,0 +1,2 @@
+org.mikebrock.livecode.server.MyOTServerWiringBeanThing
+org.mikebrock.livecode.client.local.App
