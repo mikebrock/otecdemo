@@ -6,6 +6,7 @@ import org.jboss.errai.bus.client.api.messaging.MessageCallback;
 import org.jboss.errai.bus.server.annotations.Service;
 import org.jboss.errai.otec.client.OTEngine;
 import org.jboss.errai.otec.client.StringState;
+import org.jboss.errai.otec.client.util.OTLogUtil;
 import org.jboss.errai.otec.server.OTServerEngine;
 import org.jboss.errai.otec.server.ServerOTBusService;
 
@@ -22,7 +23,9 @@ public class MyOTServerWiringBeanThing implements MessageCallback {
 
   @PostConstruct
   public void setup() {
-    final OTEngine engineWithMultiplePeers = OTServerEngine.createEngineWithMultiplePeers();
+    OTLogUtil.setLogAdapter(new OTTestingLogger());
+
+    final OTEngine engineWithMultiplePeers = OTServerEngine.createEngineWithMultiplePeers("Server");
     engineWithMultiplePeers.getEntityStateSpace().addEntity(StringState.of("The quick brown fox ..."));
     engineWithMultiplePeers.start();
 
